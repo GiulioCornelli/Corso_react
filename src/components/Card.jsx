@@ -1,21 +1,17 @@
 // pezzo di interfaccia grafica con titolo descrizione immagini (es un film su netflix)
 
 
-function Card(props, children) {  
-  const titol = props.titol
-  
-  const imgUrl = props.imgUrl
-
+function Card({ titol, imgUrl, isVisitede, children }) {  
   return (
     <>      
-    <div className="rounded-md bg-zinc-800 ">
-        <img
-          src={imgUrl}
-          alt=""
-        ></img>
+    <div className="rounded-md bg-zinc-950 ">
+        <img  src={imgUrl} alt=""></img>
         <div className="flex flex-col p-4">
-          <h2 className="text-2xl text-white font-bold">{titol}</h2>
+          <h2 className="text-2xl text-purple-400  font-bold">{titol}</h2>
           <p className="text-gray-500">{children}</p>
+          {/* <span className="text-purple-400">{isVisitede? "✔️ visitata" :"✖️ non visitata"}</span> */}
+          {isVisitede &&  <span className="text-purple-400"> ✔️ visitata</span> }
+          {!isVisitede &&  <span className="text-purple-400"> ✖️ non visitata</span> }
         </div> 
     </div>  
     </>
