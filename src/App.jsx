@@ -5,10 +5,82 @@ import './App.css'
 import Card from './components/card'  
 
 
+function hadleClick(){
+    alert("coglione");
+}
+function hadleChange(e){
+    console.log(e.target.value);
+}
+
+
 function App() {
   const [count, setCount] = useState(0)
 
-  const citys = [
+  return (
+    <>
+      <div className="grid grid-cols-4 gap-5">
+        {/* <Card 
+          isVisitede={false}
+          titol="Tokyio"
+          imgUrl="">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
+        </Card>
+        <Card 
+          isVisitede={true}
+          titol="Paris" 
+          imgUrl="">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
+        </Card>
+        <Card 
+          isVisitede={true}
+          titol="New York" 
+          imgUrl="">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
+        </Card>
+        <Card
+          isVisitede={true} 
+          titol="London" 
+          imgUrl="">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
+        </Card> */}
+
+        {/* map() metodo per array che prende ogni elemeto della citta */}
+        {citys.filter((city) => city.isVisitede).map((city)=> (
+          <Card 
+            key={city.id}
+            titol={city.titol} 
+            imgUrl={city.imgUrl} 
+            isVisitede={city.isVisitede}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
+          </Card>
+        ))}
+      </div>
+
+       <div className="card">
+        <button onClick={hadleClick}>alert</button>
+        <input type='text' onChange={hadleChange}/>
+      </div>
+
+      {/* <div className='grid grid-cols-4 gap-5'>
+          {citys.filter((city) => !city.isVisitede).map((city)=> (
+            <button onClick={hadleClick}>
+              <Card 
+                key={city.id}
+                titol={city.titol} 
+                imgUrl={city.imgUrl} 
+                isVisitede={city.isVisitede}>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
+              </Card>
+            </button>
+          ))}
+      </div> */} 
+    </>
+  )
+}
+export default App
+
+
+let citys = [
     {
       id: 1,
       titol: "Tokyo",
@@ -60,54 +132,5 @@ function App() {
   ]
 
 
-  return (
-    <>
-      <div className="grid grid-cols-4 gap-5">
-        {/* <Card 
-          isVisitede={false}
-          titol="Tokyio"
-          imgUrl="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
-        </Card>
-        <Card 
-          isVisitede={true}
-          titol="Paris" 
-          imgUrl="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
-        </Card>
-        <Card 
-          isVisitede={true}
-          titol="New York" 
-          imgUrl="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
-        </Card>
-        <Card
-          isVisitede={true} 
-          titol="London" 
-          imgUrl="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
-        </Card> */}
 
-        {/* map() metodo per array che prende ogni elemeto della citta */}
-        {citys.map((city)=> (
-          <Card 
-            key={city.id}
-            titol={city.titol} 
-            imgUrl={city.imgUrl} 
-            isVisitede={city.isVisitede}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
-          </Card>
-        ))}
-      </div>
 
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-      
-    </>
-  )
-}
-
-export default App
