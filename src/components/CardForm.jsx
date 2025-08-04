@@ -1,4 +1,16 @@
+// import per creare uno stato in react
+import { useState } from "react";
+
+
+
 function CardForm({addCity}){
+    const [formData, setFormData] = useState({
+        nome:"",
+        description:"",
+        imgUrl:"",
+        isVisitede: false
+    })
+
     const handleSubmit = ()=> {
         const city = {
             id: 8,
@@ -9,11 +21,24 @@ function CardForm({addCity}){
         addCity(city);
     }
     return(
-        <form className="flex flex-col gap-3 w-80 mb-10">
-            <input className="bg-gray-500" type="text" />
-            <input className="bg-gray-500" type="text" />
-            <input className="bg-gray-500" type="text" />
-            <button type="submit">Aggiungi Card</button>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-80 mb-10 p-5 rounded-lg bg-zinc-900">
+            <div className="bg-gray-500 flex flex-col">
+                <label>Nome</label>
+                <input type="text" name="nome"/>
+            </div>
+            <div className="bg-gray-500 flex flex-col">
+                <label>descrizione</label>
+                <input type="text" name="descrizione"/>
+            </div>
+            <div className="bg-gray-500 flex flex-col">
+                <label>Immagine</label>
+                <input type="text" nome="imgUrl"/>
+            </div>
+            <div className="bg-gray-500 flex flex-col">
+                <label>Immagine</label>
+                <input type="checkbox" nome="isVisitede"/>
+            </div>
+            <button className="bg-fuchsia-400" type="submit">Aggiungi Card</button>
         </form>
     );
 
