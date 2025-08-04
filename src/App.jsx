@@ -2,7 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Card from './components/card'  
+import Card from './components/card'
+import CardForm from './components/CardForm'  
 
 
 function hadleClick(){
@@ -16,71 +17,8 @@ function hadleChange(e){
 function App() {
   const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div className="grid grid-cols-4 gap-5">
-        {/* <Card 
-          isVisitede={false}
-          titol="Tokyio"
-          imgUrl="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
-        </Card>
-        <Card 
-          isVisitede={true}
-          titol="Paris" 
-          imgUrl="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
-        </Card>
-        <Card 
-          isVisitede={true}
-          titol="New York" 
-          imgUrl="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
-        </Card>
-        <Card
-          isVisitede={true} 
-          titol="London" 
-          imgUrl="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
-        </Card> */}
-
-        {/* map() metodo per array che prende ogni elemeto della citta */}
-        {citys.filter((city) => city.isVisitede).map((city)=> (
-          <Card 
-            key={city.id}
-            titol={city.titol} 
-            imgUrl={city.imgUrl} 
-            isVisitede={city.isVisitede}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
-          </Card>
-        ))}
-      </div>
-
-       <div className="card">
-        <button onClick={hadleClick}>alert</button>
-        <input type='text' onChange={hadleChange}/>
-      </div>
-
-      {/* <div className='grid grid-cols-4 gap-5'>
-          {citys.filter((city) => !city.isVisitede).map((city)=> (
-            <button onClick={hadleClick}>
-              <Card 
-                key={city.id}
-                titol={city.titol} 
-                imgUrl={city.imgUrl} 
-                isVisitede={city.isVisitede}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
-              </Card>
-            </button>
-          ))}
-      </div> */} 
-    </>
-  )
-}
-export default App
-
-
-let citys = [
+  // abbiamo trasformato l'array in uno stato
+  const [citys, setCity] = useState([
     {
       id: 1,
       titol: "Tokyo",
@@ -122,14 +60,42 @@ let citys = [
       titol: "Singapore",
       imgUrl: "https://images.unsplash.com/photo-1555217851-6141535bd771?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       isVisitede: false
-    },
-    {
-      id: 8,
-      titol: "Sydney",
-      imgUrl: "https://images.unsplash.com/photo-1542223616-9de9adb5e3e8?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      isVisitede: false
     }
-  ]
+  ]);
+
+  const addCity = (city) =>{
+    setCity([...citys, city]);
+  }
+
+  return (
+    <>
+      <CardForm addCity={addCity}></CardForm>
+      <div className="grid grid-cols-4 gap-5">
+        {/* map() metodo per array che prende ogni elemeto della citta */}
+        {citys.map((city)=> (
+          <Card 
+            key={city.id}
+            titol={city.titol} 
+            imgUrl={city.imgUrl} 
+            isVisitede={city.isVisitede}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sequi placeat facere sapiente
+          </Card>
+        ))}
+      </div>
+
+
+       {/* <div className="card">
+        <button onClick={hadleClick}>alert</button>
+        <input type='text' onChange={hadleChange}/>
+      </div> */}
+
+    </>
+  )
+}
+export default App
+
+
+
 
 
 
