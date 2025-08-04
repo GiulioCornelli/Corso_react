@@ -44,8 +44,8 @@ function CardForm({addCity}){
                 <label>Immagine</label>
                 <textarea name="imgUrl" value={formData.imgUrl} onChange={handleInputChange}/>
             </div>
-            <div className="bg-gray-500 flex flex-col">
-                <label>Immagine</label>
+            <div className="flex flex-col">
+                <label>Visitata?</label>
                 <input type="checkbox" name="isVisitede" checked={formData.isVisitede} onChange={handleInputChange}/>
             </div>
             <button className="bg-fuchsia-400 text-purple-400" type="submit">Aggiungi Card</button>

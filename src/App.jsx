@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Card from './components/card'
 import CardForm from './components/CardForm'  
+import Example from './components/Example'
 
 
 function hadleClick(){
@@ -78,6 +79,7 @@ function App() {
 
   return (
     <>
+      <Example></Example>
       <CardForm addCity={addCity}></CardForm>
       <div className="grid grid-cols-4 gap-5">
         {/* map() metodo per array che prende ogni elemeto della citta */}
