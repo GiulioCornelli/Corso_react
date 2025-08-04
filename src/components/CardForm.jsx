@@ -1,5 +1,5 @@
 function CardForm({addCity}){
-    const handleClick = ()=> {
+    const handleSubmit = ()=> {
         const city = {
             id: 8,
             titol: "Sydney",
@@ -9,12 +9,12 @@ function CardForm({addCity}){
         addCity(city);
     }
     return(
-        <div className="flex flex-col gap-3 w-80 mb-10">
+        <form className="flex flex-col gap-3 w-80 mb-10">
             <input className="bg-gray-500" type="text" />
             <input className="bg-gray-500" type="text" />
             <input className="bg-gray-500" type="text" />
-            <button onClick={handleClick}>Aggiungi Card</button>
-        </div>
+            <button type="submit">Aggiungi Card</button>
+        </form>
     );
 
 }
