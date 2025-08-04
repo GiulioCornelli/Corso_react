@@ -11,12 +11,22 @@ function CardForm({addCity}){
         isVisitede: false
     })
 
-    const handleSubmit = ()=> {
+    const handleInputChange = (e)=> {
+        const {name,value,type,checked} = e.target;
+        const inputValue = type == "checkbox" ? checked : value // in base al tipo di input cambia cosa adrà a prendere
+        setFormData({
+            ...formData,[name]:inputValue,
+        })
+    };
+
+    const handleSubmit = (e)=> {
+        e.preventDefault();
         const city = {
-            id: 8,
-            titol: "Sydney",
-            imgUrl: "https://images.unsplash.com/photo-1542223616-9de9adb5e3e8?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            isVisitede: false
+            id: Math.random(),
+            titol: formData.nome,
+            description: formData.description,
+            imgUrl: formData.imgUrl,
+            isVisitede: formData.isVisitede
         }
         addCity(city);
     }
@@ -24,21 +34,21 @@ function CardForm({addCity}){
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-80 mb-10 p-5 rounded-lg bg-zinc-900">
             <div className="bg-gray-500 flex flex-col">
                 <label>Nome</label>
-                <input type="text" name="nome"/>
+                <input type="text" name="nome" value={formData.name} onChange={handleInputChange}/>
             </div>
             <div className="bg-gray-500 flex flex-col">
                 <label>descrizione</label>
-                <input type="text" name="descrizione"/>
+                <textarea name="description" value={formData.description} onChange={handleInputChange}/>
             </div>
             <div className="bg-gray-500 flex flex-col">
                 <label>Immagine</label>
-                <input type="text" nome="imgUrl"/>
+                <textarea name="imgUrl" value={formData.imgUrl} onChange={handleInputChange}/>
             </div>
             <div className="bg-gray-500 flex flex-col">
                 <label>Immagine</label>
-                <input type="checkbox" nome="isVisitede"/>
+                <input type="checkbox" name="isVisitede" checked={formData.isVisitede} onChange={handleInputChange}/>
             </div>
-            <button className="bg-fuchsia-400" type="submit">Aggiungi Card</button>
+            <button className="bg-fuchsia-400 text-purple-400" type="submit">Aggiungi Card</button>
         </form>
     );
 
