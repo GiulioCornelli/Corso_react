@@ -1,10 +1,11 @@
-import { useState,useEffect, useReducer } from 'react'
+import { useState,useEffect, useReducer, useContext } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Card from './components/card'
 import CardForm from './components/CardForm'  
 import Example from './components/Example'
+import { ProvaContext } from './stores/ProvaContext'
 
 
 function hadleClick(){
@@ -92,7 +93,7 @@ function App() {
   //   },[]); 
 
   return (
-    <>
+    < ProvaContext.Provider value={{count, setCount}}>
       <Example></Example>
       <CardForm addCity={addCity}></CardForm>
       <div className="grid grid-cols-4 gap-5">
@@ -128,7 +129,7 @@ function App() {
         <button onClick={resetForm}>Reset</button>
         <button onClick={sendForm}>Invia</button>
       </form>
-    </>
+    </ProvaContext.Provider>
   )
 }
 export default App
