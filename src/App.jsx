@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react'
+import { useState,useEffect, useReducer } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -14,13 +14,22 @@ function hadleChange(e){
     console.log(e.target.value);
 }
 
- 
+function formReducer(state, action){
+    switch(action.type){
+      case "CHANGE_FILDE":
+        return {...state, [action.field]: action.value};
+      case "RESET_FORM":
+        return {name: '', email: ''};
+      default:
+        return state;
+    }
+}
 
 
 function App() {
   const [count, setCount] = useState(0)
   const [data, setData] = useState([]);
-
+  const [formState,dispechFormState] = useReducer(formReducer, {name: '', email: ''});
 
   // abbiamo trasformato l'array in uno stato
   const [citys, setCity] = useState([
@@ -53,27 +62,6 @@ function App() {
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, delectus?",
       imgUrl: "https://images.unsplash.com/photo-1494922275507-58dc039ed337?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       isVisitede: true
-    },
-    {
-      id: 5,
-      titol: "Rome",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, delectus?",
-      imgUrl: "https://images.unsplash.com/photo-1603199766980-fdd4ac568a11?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      isVisitede: false
-    },
-    {
-      id: 6,
-      titol: "Venice",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, delectus?",
-      imgUrl: "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=766&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      isVisitede: true
-    },
-    {
-      id: 7,
-      titol: "Singapore",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, delectus?",
-      imgUrl: "https://images.unsplash.com/photo-1555217851-6141535bd771?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      isVisitede: false
     }
   ]);
 
@@ -81,12 +69,27 @@ function App() {
     setCity([...citys, city]);
   }
 
-  useEffect(()=>{
-        //esegue una rischiesta http, aspetta e trasforma la chiamata in json , successivamente trasforma lo statoi date nel json ricevuto
-        fetch("https://jsonplaceholder.typicode.com/posts")
-        .then((res)=> res.json())
-        .then((data)=> {setData(data); console.log(data)})
-    },[]); 
+  const handleFieldChange = (field, value) =>{
+    //dispechFormState richiama la modifica, mentre formReducer e' la logica per modificare il campo
+    dispechFormState({type: "CHANGE_FILDE", field, value})
+  }
+
+  const resetForm = ()=>{
+    dispechFormState({type: "RESET_FORM", })
+  }
+  const sendForm = (e)=>{
+    e.preventDefault();
+    console.log(formState);
+  }
+
+
+
+  // useEffect(()=>{
+  //       //esegue una rischiesta http, aspetta e trasforma la chiamata in json , successivamente trasforma lo statoi date nel json ricevuto
+  //       fetch("https://jsonplaceholder.typicode.com/posts")
+  //       .then((res)=> res.json())
+  //       .then((data)=> {setData(data); console.log(data)})
+  //   },[]); 
 
   return (
     <>
@@ -104,7 +107,7 @@ function App() {
           </Card>
         ))}
       </div>
-      <div className="grid grid-cols-4 gap-5">
+      {/* <div className="grid grid-cols-4 gap-5">
         {data.map((item)=> (
           <div key={item.id} className='bg-slate-400 rounded-lg p-3 text-black'>
               <p>userid: {item.userId}</p>
@@ -112,8 +115,19 @@ function App() {
               <p>body: {item.body}</p>
           </div>
         ))}
-      </div>
-
+      </div> */}
+      <form>
+        <div>
+            <label htmlFor="name">Nome:</label>
+            <input type="text" name='name' id='name' value={formState.name} onChange={(e)=> handleFieldChange("name", e.target.value)}/>
+        </div>
+        <div>
+            <label htmlFor="name">Email:</label>
+            <input type="email" name='email' id='email' value={formState.email} onChange={(e)=> handleFieldChange("name", e.target.value)}/>
+        </div>
+        <button onClick={resetForm}>Reset</button>
+        <button onClick={sendForm}>Invia</button>
+      </form>
     </>
   )
 }
