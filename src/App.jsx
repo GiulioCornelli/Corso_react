@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -14,9 +14,13 @@ function hadleChange(e){
     console.log(e.target.value);
 }
 
+ 
+
 
 function App() {
   const [count, setCount] = useState(0)
+  const [data, setData] = useState([]);
+
 
   // abbiamo trasformato l'array in uno stato
   const [citys, setCity] = useState([
@@ -77,6 +81,13 @@ function App() {
     setCity([...citys, city]);
   }
 
+  useEffect(()=>{
+        //esegue una rischiesta http, aspetta e trasforma la chiamata in json , successivamente trasforma lo statoi date nel json ricevuto
+        fetch("https://jsonplaceholder.typicode.com/posts")
+        .then((res)=> res.json())
+        .then((data)=> {setData(data); console.log(data)})
+    },[]); 
+
   return (
     <>
       <Example></Example>
@@ -93,12 +104,15 @@ function App() {
           </Card>
         ))}
       </div>
-
-
-       {/* <div className="card">
-        <button onClick={hadleClick}>alert</button>
-        <input type='text' onChange={hadleChange}/>
-      </div> */}
+      <div className="grid grid-cols-4 gap-5">
+        {data.map((item)=> (
+          <div key={item.id} className='bg-slate-400 rounded-lg p-3 text-black'>
+              <p>userid: {item.userId}</p>
+              <p>title: {item.title}</p>
+              <p>body: {item.body}</p>
+          </div>
+        ))}
+      </div>
 
     </>
   )
