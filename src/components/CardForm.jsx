@@ -1,7 +1,7 @@
 // import per creare uno stato in react
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-
+import { add } from "../redux/slices/citiesSlice";
 
 
 function CardForm({addCity}){
