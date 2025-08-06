@@ -1,0 +1,5 @@
+Librerie de rivedere:
+
+Redux => https://redux.js.org/
+
+React Router => https://reactrouter.com/  || per installarla `npm install react-router-dom`
