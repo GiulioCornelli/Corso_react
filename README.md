@@ -20,6 +20,6 @@
 
 ### Installazione
 ```bash
-git clone https://github.com/<tuo‑utente>/<nome‑repo>.git
+git clone https://github.com/<tuo‑utente>/Corso_react.git
 cd <nome‑repo>
 npm install
