@@ -5,35 +5,20 @@ import './App.css'
 import Card from './components/card'
 import CardForm from './components/CardForm'  
 import Example from './components/Example'
-
-
-function hadleClick(){
-    alert("coglione");
-}
-function hadleChange(e){
-    console.log(e.target.value);
-}
-
-function formReducer(state, action){
-    switch(action.type){
-      case "CHANGE_FILDE":
-        return {...state, [action.field]: action.value};
-      case "RESET_FORM":
-        return {name: '', email: ''};
-      default:
-        return state;
-    }
-}
+import { useSelector } from 'react-redux'
 
 
 function App() {
+  // prende nello state i valorei di cities, immagazinati nello store
+  const cities = useSelector((state)=> state.cities.value);
+  console.log("Cities:", cities);
+
   return (
     <>
       <Example></Example>
-      <CardForm addCity={addCity}></CardForm>
+      <CardForm></CardForm>
       <div className="grid grid-cols-4 gap-5">
-        {/* map() metodo per array che prende ogni elemeto della citta */}
-        {citys.map((city)=> (
+        {cities.map((city)=> (
           <Card 
             key={city.id}
             titol={city.titol} 

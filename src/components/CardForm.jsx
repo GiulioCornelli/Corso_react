@@ -1,9 +1,11 @@
 // import per creare uno stato in react
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 
 
 function CardForm({addCity}){
+    const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         nome:"",
         description:"",
@@ -16,7 +18,7 @@ function CardForm({addCity}){
         const inputValue = type == "checkbox" ? checked : value // in base al tipo di input cambia cosa adrà a prendere
         setFormData({
             ...formData,[name]:inputValue,
-        })
+        });
     };
 
     const handleSubmit = (e)=> {
@@ -28,7 +30,13 @@ function CardForm({addCity}){
             imgUrl: formData.imgUrl,
             isVisitede: formData.isVisitede
         }
-        addCity(city);
+        setFormData({
+            nome:"",
+            description:"",
+            imgUrl:"",
+            isVisitede: false
+        })
+        dispatch(add(city));
     }
     return(
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-80 mb-10 p-5 rounded-lg bg-zinc-900">

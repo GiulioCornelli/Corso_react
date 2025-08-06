@@ -42,7 +42,7 @@ export const citiesSlice = createSlice({
         }
     }
 
-})
+});
 
 export const {add} = citiesSlice.actions; 
 

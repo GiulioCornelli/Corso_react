@@ -1,21 +1,17 @@
 import { data } from "autoprefixer";
 import { useState,useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment } from "../redux/slices/counterSlice";
 
 function Example (){
-    const [count, setCount] = useState(0);
-    // e' una funzione che vine chiamta ogni volta che le sue dipendeze(in questo caso count) vengono modificate
-    useEffect(()=>{
-        document.title = `Conteggio ${count}`;
-
-        // //esegue una rischiesta http, aspetta e trasforma la chiamata in json , successivamente trasforma lo statoi date nel json ricevuto
-        // fetch("https://jsonplaceholder.typicode.com/posts").then((res)=> res.json()).then((data)=> {setData(data); console.log(data)})
-    },[]); 
-
+    const count = useSelector((state) => state.counter.value );
+    const dispatch = useDispatch();
 
     return (
         <div>
-            <p>Conteggio: {count}</p>
-            <button onClick={()=> setCount(count + 1 )}>Incrementa</button>
+            <p className="mb-3">Conteggio: {count}</p>
+            <button aria-label="Increment value" onClick={()=> dispatch(increment())}>Incrementa+</button>
+            <button aria-label="Decrement value" onClick={()=> dispatch(decrement())}>Decrementa-</button>
         </div>
     );
 
