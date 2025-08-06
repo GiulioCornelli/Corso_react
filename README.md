@@ -1,12 +1,25 @@
-# React + Vite
+# 📚 Corso-React 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## ⚙️ Introduzione
+ Corso di React che ho seguito: sono partito dalle basi fino ad arrivare a routing avanzato con React Router e la gestione dello stato con Redux Toolkit.
 
-Currently, two official plugins are available:
+## 🧠 Contenuti del corso
+1. Configurazione dell'ambiente con **Create React App / Vite**
+2. Creazione di componenti React funzionali
+3. Uso degli **Hook**: `useState`, `useEffect`
+4. Gestione dello stato globale con **Redux Toolkit** e `react-redux`
+5. Routing dinamico e nested con **React Router v6+**
+6. Integrazione di Redux con il routing per visualizzazione dinamica basata sul parametro `id`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Setup iniziale
 
-## Expanding the ESLint configuration
+### Prerequisiti
+- Node.js (versione LTS )
+- npm 
+- Git
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Installazione
+```bash
+git clone https://github.com/<tuo‑utente>/<nome‑repo>.git
+cd <nome‑repo>
+npm install
